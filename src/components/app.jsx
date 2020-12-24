@@ -14,34 +14,36 @@ class App extends Component {
     };
   }
 
-	selectFlat = (index) => {
-	  this.setState({ selectedFlat: flats[index] });
-	}
+  selectFlat = (index) => {
+    this.setState({ selectedFlat: flats[index] });
+  }
 
-	center() {
-	  return {
-	    lat: this.state.selectedFlat.lat,
-	    lng: this.state.selectedFlat.lng
-	  };
-	}
+  center() {
+    const { selectedFlat } = this.state;
+    return {
+      lat: selectedFlat.lat,
+      lng: selectedFlat.lng
+    };
+  }
 
 
-	render() {
-	  return (
-  <div>
-    <FlatList
-      flats={this.state.flats}
-      selectedFlat={this.state.selectedFlat}
-      selectFlat={this.selectFlat}
-    />
-    <div className="map-container">
-      <GoogleMapReact defaultCenter={this.center()} defaultZoom={12}>
-        <Marker lat={this.state.selectedFlat.lat} lng={this.state.selectedFlat.lng} />
-      </GoogleMapReact>
-    </div>
-  </div>
-	  );
-	}
+  render() {
+    const { flats, selectedFlat } = this.state;
+    return (
+      <div>
+        <FlatList
+          flats={flats}
+          selectedFlat={selectedFlat}
+          selectFlat={this.selectFlat}
+        />
+        <div className="map-container">
+          <GoogleMapReact defaultCenter={this.center()} defaultZoom={12}>
+            <Marker lat={selectedFlat.lat} lng={selectedFlat.lng} />
+          </GoogleMapReact>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;

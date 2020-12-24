@@ -2,9 +2,10 @@ import React from 'react';
 import Flat from './flat';
 
 const FlatList = (props) => {
+  const { flats } = props;
   return (
     <div className="flat-list">
-      { props.flats.map((flat, index) => (
+      { flats.map((flat, index) => (
         <Flat
           flat={flat}
           key={flat.lat}
